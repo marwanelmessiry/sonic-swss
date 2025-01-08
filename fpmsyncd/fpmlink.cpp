@@ -208,7 +208,7 @@ uint64_t FpmLink::readData()
     size_t start = 0, left;
     ssize_t read;
 
-     try
+    try
     {
          read = ::read(m_connection_socket, m_messageBuffer + m_pos, m_bufSize - m_pos);
     }
@@ -216,6 +216,7 @@ uint64_t FpmLink::readData()
     {
         std::cerr << e.what() << 'ERROR: exceeding buffer size ...';
     }
+
 
     if (read == 0)
         throw FpmConnectionClosedException();
