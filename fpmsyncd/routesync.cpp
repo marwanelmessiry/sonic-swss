@@ -2150,10 +2150,14 @@ string RouteSync::getNextHopIf(struct rtnl_route *route_obj)
         char if_name[IFNAMSIZ] = "0";
 
         /* If we cannot get the interface name */
-        if (!getIfName(if_index, if_name, IFNAMSIZ))
+        i if (!getIfName(if_index, if_name, IFNAMSIZ))
         {
-            strcpy(if_name, "unknown");
+              strncpy(if_name, "unknown", IFNAMSIZ - 1);// changing strcpy into strncpy to ensure the copied string will not exceed the boundary
+              if_name[IFNAMSIZ - 1] = '\0'; // Ensure last element of the string is NULL element
+             
+            
         }
+
 
         result += if_name;
 
